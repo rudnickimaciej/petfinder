@@ -17,7 +17,7 @@ export default function HomeScreen() {
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText style={{ fontFamily: 'Poppins-Black' }} type="title">Welcome!</ThemedText>
-        {/* <Link href = "/index" style={{color:'blue'}}> index</Link> */}
+        <Link href = "/explore" style={{color:'blue'}}> index</Link>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
