@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "PetFinderAppExpo3",
-    "slug": "PetFinderAppExpo3",
+    "name": "petfinder",
+    "slug": "petfinder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "petfinder",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
