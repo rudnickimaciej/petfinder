@@ -43,6 +43,8 @@ const SignIn = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
+      <Link href = "/home" style={{color:'blue'}}> index</Link>
+
         <View
           className="w-full flex justify-center h-full px-4 my-6"
           style={{
