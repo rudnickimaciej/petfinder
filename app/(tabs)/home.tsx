@@ -1,53 +1,50 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, ScrollView } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import {Link } from 'expo-router'
+import PetCard from '@/components/PetCard';
+import PetList from '@/components/PetList';
+import { Pet } from '@/types/Pet';
+const missingPets: Pet[] = [
+  {
+    id: 1,
+    name: 'Buddy',
+    date: '2024-08-15',
+    address: '123 Pet Lane',
+    image: 'buddy',
+  },
+  {
+    id: 2,
+    name: 'Luna',
+    date: '2024-08-16',
+    address: '456 Furry Ave',
+    image: 'luna',
+  },
+  {
+      id: 3,
+      name: 'Luna',
+      date: '2024-08-16',
+      address: '456 Furry Ave',
+      image: 'luna',
+    }
+];
+
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
+    <ScrollView>
       <ThemedView style={styles.titleContainer}>
         <ThemedText style={{ fontFamily: 'Poppins-Black' }} type="title">Welcome!</ThemedText>
         <Link href = "/explore" style={{color:'blue'}}> index</Link>
         <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText style={{ fontFamily: 'Poppins-Black' }}  type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText > 
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <PetList listName="Missing Pets" pets={missingPets}/>         
+      <PetList listName="Found Pets" pets={missingPets}/>         
+
+   
+    </ScrollView>
   );
 }
 
