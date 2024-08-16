@@ -12,7 +12,7 @@ export default function TabLayout() {
 
   return (
     <>
-          <CustomHeader />
+    <CustomHeader/>
 
     <Tabs
       screenOptions={{

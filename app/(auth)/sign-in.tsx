@@ -43,7 +43,6 @@ const SignIn = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-      <Link href = "/home" style={{color:'blue'}}> index</Link>
 
         <View
           className="w-full flex justify-center h-full px-4 my-6"
@@ -58,7 +57,7 @@ const SignIn = () => {
           />
 
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to Aora
+            Log in to PetFinder
           </Text>
 
           <FormField
@@ -95,6 +94,17 @@ const SignIn = () => {
               className="text-lg font-psemibold text-secondary"
             >
               Signup
+            </Link>
+          </View>
+          <View className="flex justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              (DEV)
+            </Text>
+            <Link
+              href="/home"
+              className="text-lg font-psemibold text-secondary"
+            >
+              Go home 
             </Link>
           </View>
         </View>

@@ -16,20 +16,28 @@ const petImages: Record<Pet['image'], ImageSourcePropType> = {
 
 const PetCard: React.FC<PetCardProps> = ({ pet }) => {
     return (
-      <View className="bg-white rounded-lg overflow-hidden mr-4 w-48">
+      <View className="bg-white rounded-lg overflow-hidden mr-4 w-48"
+    //   style={{
+    //     shadowColor: '#000',
+    //     shadowOffset: { width: 0, height: 2 },
+    //     shadowOpacity: 0.25,
+    //     shadowRadius: 3.84,
+    //     elevation: 5, // For Android shadow
+    //   }}
+    >
         <View className="relative">
           <Image source={petImages[pet.image]} className="w-full h-40" />
           <View className="absolute top-2 left-3 w-20 h-5 rounded-full bg-green-500 flex items-center justify-center">
-            <Text className="text-white text-xs">In Search</Text>
+            <Text className="text-white text-xs font-plight">In Search</Text>
             </View>
         </View>
         <View className="p-3">
-          <Text className="text-lg font-bold">{pet.name}</Text>
+          <Text className="text-lg font-pbold">{pet.name}</Text>
           <View className="flex-row items-center my-1">
             <FontAwesome name="calendar" size={16} color="gray" />
-            <Text className="ml-2 text-gray-500">{pet.date}</Text>
+            <Text className="ml-2 text-gray-500 font-plight">{pet.date}</Text>
           </View>
-          <Text className="text-gray-500">{pet.address}</Text>
+          <Text className="text-gray-500 font-plight">{pet.address}</Text>
         </View>
       </View>
     );

@@ -17,12 +17,14 @@ const isLogged = false;
           name="sign-in"
           options={{
             headerShown: false,
+            headerBackVisible: false
           }}
         />
         <Stack.Screen
           name="sign-up"
           options={{
             headerShown: false,
+            headerBackVisible: false
           }}
         />
       </Stack>
