@@ -35,11 +35,6 @@ const missingPets: Pet[] = [
 export default function HomeScreen() {
   return (
     <ScrollView>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText style={{ fontFamily: 'Poppins-Black' }} type="title">Welcome!</ThemedText>
-        <Link href = "/explore" style={{color:'blue'}}> index</Link>
-        <HelloWave />
-      </ThemedView>
       <PetList listName="Missing Pets" pets={missingPets}/>         
       <PetList listName="Found Pets" pets={missingPets}/>         
 

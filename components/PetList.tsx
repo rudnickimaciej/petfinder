@@ -14,7 +14,7 @@ const PetList: React.FC<PetListProps> = ({pets, listName}) => {
     const navigation = useNavigation();
 
     const handlePress = () => {
-    //   navigation.navigate("/search",); // Replace 'AnotherPage' with the actual name of the page you want to navigate to.
+    //    navigation.navigate("profile",); // Replace 'AnotherPage' with the actual name of the page you want to navigate to.
     };
   return (
     <View className="mt-6 p-4">
