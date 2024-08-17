@@ -3,12 +3,12 @@ import React from 'react'
 
 type Props = {}
 
-const Create = (props: Props) => {
+const create = (props: Props) => {
   return (
     <View>
-      <Text>Create</Text>
+      <Text>create</Text>
     </View>
   )
 }
 
-export default Create
+export default create
