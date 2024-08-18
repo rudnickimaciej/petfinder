@@ -21,6 +21,7 @@ const PetList: React.FC<PetListProps> = ({ pets, listName }) => {
   const [pressedPetId, setPressedPetId] = useState<number | null>(null);
 
   const handlePress = (pet: Pet) => {
+    
     router.push({
         pathname: `/pet/[id]`,
         params: { id: pet.id.toString(), pet: JSON.stringify(pet) },

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, router } from "expo-router";
+import { useEffect, useState } from "react";
+import { Link, router, useNavigation } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
@@ -17,7 +17,12 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const navigation = useNavigation();
 
+  useEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+  
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");

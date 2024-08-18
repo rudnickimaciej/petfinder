@@ -65,7 +65,7 @@ export default function TabLayout() {
         }}
         />
               <Tabs.Screen
-        name="messages"
+        name="chatlist"
         options={{
           title: 'Messages',
           tabBarIcon: ({ color, focused }) => (
