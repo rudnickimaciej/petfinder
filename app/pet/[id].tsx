@@ -1,12 +1,12 @@
-// src/screens/PetCardDetail.tsx
 import React from 'react';
-import { View, Text, Image, Button, ScrollView } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Pet } from '@/types/Pet';
+import images from './../../constants/images';
 
 const PetCardDetail: React.FC = () => {
   const route = useRoute();
-  const navigation = useNavigation();
   const { pet } = route.params as { pet: Pet };
 
   const pet2 = {
@@ -25,24 +25,49 @@ const PetCardDetail: React.FC = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 16 }} className="bg-gray-100">
+    <ScrollView contentContainerStyle={{ paddingBottom: 20 }} className="pt-10 bg-white">
       {/* Pet Image */}
-      <Image source={{ uri: pet.image }} className="w-full h-72 rounded-xl mb-6" />
+      <Image source={images.dog2} className="w-full h-72 rounded-xl mb-4" />
 
       {/* Pet Info */}
       <View className="bg-white rounded-xl p-6 shadow">
-        <Text className="text-3xl font-bold text-gray-800 mb-2">{pet2.name}</Text>
-        <Text className="text-lg italic text-gray-500 mb-4">{pet2.breed}</Text>
-        <Text className="text-base text-gray-700 mb-4">{pet2.description}</Text>
-
-        <View className="flex-row justify-between mb-4">
-          <Text className="text-base font-semibold text-gray-600">Date Missing:</Text>
-          <Text className="text-base text-gray-600">{pet2.dateOfMissing}</Text>
+        {/* Pet Name and Heart Icon */}
+        <View className="flex-row justify-between items-center mb-4">
+          <Text className="text-3xl font-bold text-gray-800">{pet2.name}</Text>
+          <TouchableOpacity>
+            <MaterialIcons name="favorite-border" size={28} color="red" />
+          </TouchableOpacity>
         </View>
 
-        <View className="flex-row justify-between mb-4">
-          <Text className="text-base font-semibold text-gray-600">Location:</Text>
-          <Text className="text-base text-gray-600">{pet2.location}</Text>
+        {/* Pet Breed and Tags */}
+        <Text className="text-lg italic text-gray-500 mb-4">{pet2.breed}</Text>
+        <View className="flex-row flex-wrap mb-4">
+          <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
+            <Text className="text-sm text-gray-600">Friendly</Text>
+          </View>
+          <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
+            <Text className="text-sm text-gray-600">Energetic</Text>
+          </View>
+          <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
+            <Text className="text-sm text-gray-600">Golden Retriever</Text>
+          </View>
+        </View>
+
+        {/* Pet Description */}
+        <Text className="text-base text-gray-700 mb-4">{pet2.description}</Text>
+
+        {/* Date Missing */}
+        <View className="flex-row items-center mb-4">
+          <FontAwesome name="calendar" size={18} color="gray" />
+          <Text className="ml-2 text-base font-semibold text-gray-600">Date Missing:</Text>
+          <Text className="ml-2 text-base text-gray-600">{pet2.dateOfMissing}</Text>
+        </View>
+
+        {/* Location */}
+        <View className="flex-row items-center mb-4">
+          <FontAwesome name="map-marker" size={18} color="gray" />
+          <Text className="ml-2 text-base font-semibold text-gray-600">Location:</Text>
+          <Text className="ml-2 text-base text-gray-600">{pet2.location}</Text>
         </View>
 
         {/* User Info */}
@@ -56,6 +81,12 @@ const PetCardDetail: React.FC = () => {
             </View>
           </View>
         </View>
+
+        {/* Call / SMS Button */}
+        <TouchableOpacity className="bg-blue-500 p-4 rounded-xl mt-6 flex-row justify-center items-center">
+          <MaterialIcons name="phone" size={20} color="white" />
+          <Text className="text-white font-bold ml-2">Call / SMS</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

@@ -12,8 +12,8 @@ const CustomHeader: React.FC = () => {
     className="flex-row justify-between items-center px-4 pt-12 pb-4 bg-white shadow-md"
     style={{
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
+      shadowOffset: { width: 2, height: 3 },
+      shadowOpacity: 3.25,
       shadowRadius: 3.1,
       elevation: 5, // For Android shadow
     }}
@@ -31,10 +31,10 @@ const CustomHeader: React.FC = () => {
     
     <View className="flex-row space-x-4">
       <Link href='/sign-in'>
-        <Ionicons name="person-circle-outline" size={24} color="black" />
+        <Ionicons name="person-circle-outline" size={24} color="#687076" />
       </Link>
       <Pressable onPress={() => router.push('/notifications')}>
-        <Ionicons name="notifications-outline" size={24} color="black" />
+        <Ionicons name="notifications-outline" size={24} color="#687076" />
         {hasNewNotifications && (
             <View className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full" />
           )}
