@@ -5,17 +5,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 // import { RootStackParamList } from '../App';
 import {router} from 'expo-router'
+import { Chat, ChatPreview } from '@/types/Chat';
 
-type Chat = {
-  id: string;
-  userName: string;
-  lastMessage: string;
-  timestamp: string; // ISO string
-  avatar: string;  // URL or local image path
-  status: 'online' | 'offline' | 'unread';
-};
 
-const chats: Chat[] = [
+const chats: ChatPreview[] = [
   {
     id: '1',
     userName: 'Rebeka Ratry',
@@ -53,16 +46,13 @@ const chats: Chat[] = [
 const ChatListScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const renderChatItem = ({ item }: { item: Chat }) => {
+  const renderChatItem = ({ item }: { item: ChatPreview }) => {
     const timeAgo = formatDistanceToNow(parseISO(item.timestamp), { addSuffix: true });
 
     return (
       <TouchableOpacity
         className="flex-row items-center p-4 border-b border-gray-200"
-        onPress={() =>     router.push({
-          pathname: "/chats/[id]",
-          params: { chatId: item.id, userName: item.userName  },
-      })}
+        onPress={() =>router.push("/chats/1")}
       >
         <Image
           source={{ uri: item.avatar }}
