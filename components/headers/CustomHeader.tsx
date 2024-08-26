@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image,View, Text, Pressable, Modal, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { images } from "../constants";
+import { images } from "../../constants";
 import {Link, router} from 'expo-router'
 
 const CustomHeader: React.FC = () => {

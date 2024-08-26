@@ -29,7 +29,7 @@ export const fetchChatByChatId = async (chatId: string): Promise<Chat | undefine
     setTimeout(() => {
         console.log(chatId)
       resolve(mockChats.find(c=>c.id == chatId));
-    }, 2000); // Simulate a delay like a real network request
+    }, 500); // Simulate a delay like a real network request
   });
 };
 

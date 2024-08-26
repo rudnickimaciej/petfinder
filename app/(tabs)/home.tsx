@@ -1,3 +1,4 @@
+import CustomHeader from '@/components/headers/CustomHeader';
 import MapWithMarkers from '@/components/MapWithMarkers';
 import PetList from '@/components/PetList';
 import { PetOnMap } from '@/types/Pet';
@@ -60,6 +61,8 @@ const HomePage: React.FC = () => {
 
   return (
     <ScrollView className='flex-1'>
+            <CustomHeader/>
+
       <MapWithMarkers pets={pets} initialRegion={initialRegion} />
       <PetList listName="Missing Pets" pets={missingPets}/>         
       <PetList listName="Found Pets" pets={missingPets}/>    

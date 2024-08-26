@@ -56,6 +56,8 @@ export default function RootLayout() {
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="pet/[id]" options={{ title: '', headerTransparent:true }} />
         <Stack.Screen name="notifications" options={{ title: 'Notifications'}} />
+        <Stack.Screen name="profile" options={{ title: 'Profile',headerShown: false}} />
+        
         <Stack.Screen name="chats/[id]" options={{headerShown: false}} />
         <Stack.Screen name="chatlist" options={{headerShown: true}} />
 

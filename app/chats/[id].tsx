@@ -3,39 +3,45 @@ import { View, Text, TextInput, FlatList, TouchableOpacity, Image } from 'react-
 import { useLocalSearchParams } from 'expo-router';
 import { format, isToday, isYesterday } from 'date-fns';
 import { fetchChatByChatId } from '@/api/chatservicemock';
-import { ChatMessage } from '@/types/Chat';
+import { Chat, ChatMessage } from '@/types/Chat';
 import LoadingIndicator from '@/components/LoadingIndicator'; // Import the loading component
 import LoadingIndicator2 from '@/components/LoadingIndicator2';
+import { useLoading } from '@/hooks/useLoading';
 
 const ChatScreen: React.FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [avatar, setAvatar] = useState<string>();
-  const [userName, setUserName] = useState<string>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>();
+  // const [avatar, setAvatar] = useState<string>();
+  // const [userName, setUserName] = useState<string>();
+  // // const [loading, setLoading] = useState<boolean>(true);
+  // // const [error, setError] = useState<string | null>(null);
+  // const [messages, setMessages] = useState<ChatMessage[]>();
   const [text, setText] = useState<string>('');
-  
-  useEffect(() => {
-    const loadChats = async () => {
-      try {
-        const fetchedChat = await fetchChatByChatId(id);
-        if (!fetchedChat) {
-          setError('Failed to load chats');
-          return; 
-        }
-        setMessages(fetchedChat.messages);
-        setUserName(fetchedChat.userName);
-        setAvatar(fetchedChat.avatar);
-      } catch (err) {
-        setError('Failed to load chats');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { data: chatData, loading, error, load } = useLoading<Chat|undefined>();
 
-    loadChats();
-  }, [id]);
+  useEffect(() => {
+    load(() => fetchChatByChatId(id));
+  }, [id, load]);
+  
+  // useEffect(() => {
+  //   const loadChats = async () => {
+  //     try {
+  //       const fetchedChat = await fetchChatByChatId(id);
+  //       if (!fetchedChat) {
+  //         setError('Failed to load chats');
+  //         return; 
+  //       }
+  //       setMessages(fetchedChat.messages);
+  //       setUserName(fetchedChat.userName);
+  //       setAvatar(fetchedChat.avatar);
+  //     } catch (err) {
+  //       setError('Failed to load chats');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   loadChats();
+  // }, [id]);
 
   const renderMessageItem = ({ item }: { item: ChatMessage }) => (
     <View className={`flex-row my-2 ${item.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -82,11 +88,11 @@ const ChatScreen: React.FC = () => {
       <View className="flex-row items-center justify-between bg-blue-400 p-4">
         <View className="flex-row items-center mt-7">
           <Image
-            source={{ uri: avatar }}
+            source={{ uri: chatData?.avatar }}
             className="w-12 h-12 rounded-full"
             resizeMode="cover"
           />
-          <Text className="text-white text-lg font-bold ml-4">{userName}</Text>
+          <Text className="text-white text-lg font-bold ml-4">{chatData?.userName}</Text>
         </View>
         <TouchableOpacity>
           <Text className="text-white text-lg">⋮</Text>
@@ -95,7 +101,7 @@ const ChatScreen: React.FC = () => {
 
       {/* Messages List */}
       <FlatList
-        data={messages}
+        data={chatData?.messages}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <>
@@ -113,7 +119,7 @@ const ChatScreen: React.FC = () => {
           <Text className="text-gray-500 text-base">📷</Text>
         </TouchableOpacity>
         <TextInput
-          placeholder={`Write something for ${userName}...`}
+          placeholder={`Write something for ${chatData?.userName}...`}
           value={text}
           onChangeText={setText}
           className="flex-1 px-4 py-2 bg-gray-100 rounded-full text-base"

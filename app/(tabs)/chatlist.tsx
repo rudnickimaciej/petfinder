@@ -6,6 +6,8 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 // import { RootStackParamList } from '../App';
 import {router} from 'expo-router'
 import { Chat, ChatPreview } from '@/types/Chat';
+import CustomHeader from '@/components/headers/CustomHeader';
+import ChatlistHeader from '@/components/headers/ChatlistHeader';
 
 
 const chats: ChatPreview[] = [
@@ -54,6 +56,7 @@ const ChatListScreen: React.FC = () => {
         className="flex-row items-center p-4 border-b border-gray-200"
         onPress={() =>router.push("/chats/1")}
       >
+        
         <Image
           source={{ uri: item.avatar }}
           className="w-12 h-12 rounded-full"
@@ -79,6 +82,8 @@ const ChatListScreen: React.FC = () => {
 
   return (
     <View className="flex-1 bg-white">
+     <ChatlistHeader/>
+
       <FlatList
         data={chats}
         keyExtractor={(item) => item.id}

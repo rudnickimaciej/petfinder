@@ -4,7 +4,7 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import CustomHeader from '@/components/CustomHeader';
+import CustomHeader from '@/components/headers/CustomHeader';
 import { View } from 'react-native';
 
 export default function TabLayout() {
@@ -12,7 +12,7 @@ export default function TabLayout() {
 
   return (
     <>
-    <CustomHeader/>
+    {/* <CustomHeader/> */}
 
     <Tabs
       screenOptions={{
