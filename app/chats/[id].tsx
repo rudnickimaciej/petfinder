@@ -53,7 +53,7 @@ const ChatScreen: React.FC = () => {
         <Text className={`${item.sender === 'user' ? 'text-white' : 'text-black'} text-base`}>
           {item.message}
         </Text>
-        <Text className="text-xs text-gray-400 mt-1">
+        <Text className="text-xs text-gray-600 mt-1">
           {format(new Date(item.timestamp), 'hh:mm a')}
         </Text>
       </View>
@@ -116,7 +116,7 @@ const ChatScreen: React.FC = () => {
       {/* Input Field */}
       <View className="flex-row items-center border-t border-gray-300 p-3 bg-white">
         <TouchableOpacity className="mr-2 p-2 bg-gray-200 rounded-full">
-          <Text className="text-gray-500 text-base">📷</Text>
+          <Text className="text-black-500 text-base">📷</Text>
         </TouchableOpacity>
         <TextInput
           placeholder={`Write something for ${chatData?.userName}...`}

@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker, Region } from 'react-native-maps';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import { pl } from 'date-fns/locale';
+
 import {router} from 'expo-router'
 interface Pet {
   id: string;
@@ -78,7 +80,7 @@ const MapWithMarkers: React.FC<MapWithMarkersProps> = ({ pets, initialRegion, on
               {/* Last Seen Date with Icon */}
               <View className="flex-row items-center mt-2">
                 <MaterialIcons name="date-range" size={20} color="#555" />
-                <Text className="ml-2 text-sm text-gray-600">Last seen: {formatDistanceToNow(parseISO(selectedPet.lastSeenDate), { addSuffix: true })}</Text>
+                <Text className="ml-2 text-sm text-gray-600">Ostatnio widziany: {formatDistanceToNow(parseISO(selectedPet.lastSeenDate), { addSuffix: true, locale: pl })}</Text>
               </View>
               {/* Pet Description */}
               <Text className="mt-2 text-sm text-gray-600">{selectedPet.description}</Text>
@@ -89,7 +91,7 @@ const MapWithMarkers: React.FC<MapWithMarkersProps> = ({ pets, initialRegion, on
               onPress={() => handlePress(selectedPet)}
               style={{ position: 'absolute', top: 0, right: 0 }}
             >
-              <Text className="text-white text-center font-bold text-xs">More Details</Text>
+              <Text className="text-white text-center font-bold text-xs">Więcej szczegółów</Text>
             </TouchableOpacity>
           </View>
         </View>

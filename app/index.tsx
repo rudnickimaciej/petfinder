@@ -32,7 +32,7 @@ const App = () => {
     // AsyncStorage.removeItem('isAppFirstLaunched');
   // }, []);
 
-  useEffect(()=>{setIsAppFirstLaunched(true)},[])
+  useEffect(()=>{setIsAppFirstLaunched(false)},[])
 
   if(isAppFirstLaunched == true) 
     return <Redirect href="/onboarding" />

@@ -64,8 +64,8 @@ const HomePage: React.FC = () => {
             <CustomHeader/>
 
       <MapWithMarkers pets={pets} initialRegion={initialRegion} />
-      <PetList listName="Missing Pets" pets={missingPets}/>         
-      <PetList listName="Found Pets" pets={missingPets}/>    
+      <PetList listName="Zagubione zwierzaki" pets={missingPets}/>         
+      <PetList listName="Znalezione" pets={missingPets}/>    
     </ScrollView>
   );
 }

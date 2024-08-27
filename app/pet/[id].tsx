@@ -43,10 +43,10 @@ const PetCardDetail: React.FC = () => {
         <Text className="text-lg italic text-gray-500 mb-4">{pet2.breed}</Text>
         <View className="flex-row flex-wrap mb-4">
           <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
-            <Text className="text-sm text-gray-600">Friendly</Text>
+            <Text className="text-sm text-gray-600">Przyjazny</Text>
           </View>
           <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
-            <Text className="text-sm text-gray-600">Energetic</Text>
+            <Text className="text-sm text-gray-600">Suczka</Text>
           </View>
           <View className="bg-gray-200 px-3 py-1 rounded-full mr-2 mb-2">
             <Text className="text-sm text-gray-600">Golden Retriever</Text>
@@ -59,20 +59,20 @@ const PetCardDetail: React.FC = () => {
         {/* Date Missing */}
         <View className="flex-row items-center mb-4">
           <FontAwesome name="calendar" size={18} color="gray" />
-          <Text className="ml-2 text-base font-semibold text-gray-600">Date Missing:</Text>
+          <Text className="ml-2 text-base font-semibold text-gray-600">Data zaginięcia:</Text>
           <Text className="ml-2 text-base text-gray-600">{pet2.dateOfMissing}</Text>
         </View>
 
         {/* Location */}
         <View className="flex-row items-center mb-4">
           <FontAwesome name="map-marker" size={18} color="gray" />
-          <Text className="ml-2 text-base font-semibold text-gray-600">Location:</Text>
+          <Text className="ml-2 text-base font-semibold text-gray-600">Lokalizacja:</Text>
           <Text className="ml-2 text-base text-gray-600">{pet2.location}</Text>
         </View>
 
         {/* User Info */}
         <View className="border-t border-gray-200 mt-6 pt-4">
-          <Text className="text-xl font-bold text-gray-800 mb-4">Reported By:</Text>
+          <Text className="text-xl font-bold text-gray-800 mb-4">Zgłoszone przez:</Text>
           <View className="flex-row items-center">
             <Image source={{ uri: pet2.user.avatar }} className="w-12 h-12 rounded-full mr-4" />
             <View>
@@ -85,7 +85,7 @@ const PetCardDetail: React.FC = () => {
         {/* Call / SMS Button */}
         <TouchableOpacity className="bg-blue-500 p-4 rounded-xl mt-6 flex-row justify-center items-center">
           <MaterialIcons name="phone" size={20} color="white" />
-          <Text className="text-white font-bold ml-2">Call / SMS</Text>
+          <Text className="text-white font-bold ml-2">Zadzwoń / SMS</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

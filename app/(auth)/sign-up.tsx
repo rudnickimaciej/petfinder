@@ -51,27 +51,27 @@ const SignUp: React.FC = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View
-          className="w-full flex justify-center h-full px-4 my-6"
+          className="w-full flex justify-center h-full px-4"
           style={{
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
-          <Image
-            source={images.logo}
-            resizeMode="contain"
-            className="w-[115px] h-[34px]"
-          />
+             <View className="relative my-12">
+              <Text className="text-4xl font-bold text-center text-white">
+                <Text className="text-secondary-200">PetFinder</Text>
+              </Text>
+            </View>
 
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Sign Up to Aora
+            Załóż konto
           </Text>
 
           <FormField
-            title="Username"
+            title="Nazwa użytkownika"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
-            placeholder="Username"
+            placeholder="Nazwa użytkownika"
           />
 
           <FormField
@@ -84,15 +84,15 @@ const SignUp: React.FC = () => {
           />
 
           <FormField
-            title="Password"
+            title="Hasło"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
-            placeholder="Password"
+            placeholder="Hasło"
           />
 
           <CustomButton
-            title="Sign Up"
+            title="Utwórz konto"
             handlePress={submit}
             containerStyles="mt-7"
             isLoading={isSubmitting}
@@ -101,13 +101,13 @@ const SignUp: React.FC = () => {
 
           <View className="flex justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">
-              Have an account already?
+              Masz już konto?
             </Text>
             <Link
               href="/sign-in"
               className="text-lg font-psemibold text-secondary"
             >
-              Login
+              Zaloguj się
             </Link>
           </View>
         </View>
