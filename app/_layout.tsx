@@ -60,6 +60,7 @@ export default function RootLayout() {
         <Stack.Screen name="chats/[id]" options={{headerShown: false}} />
         <Stack.Screen name="chatlist" options={{headerShown: true}} />
         <Stack.Screen name="filter" options={{headerShown:false}} />
+        <Stack.Screen name="createmissingpet" />
 
       </Stack>
     </ThemeProvider>

@@ -20,7 +20,7 @@ const ChatlistHeader: React.FC = () => {
   >
     <View className="relative">
       <Text className="text-2xl font-bold text-center text-white">
-        <Text className="text-black-200">Wiadomości</Text>
+        <Text className="font-semibold text-black-200">Wiadomości</Text>
       </Text>
     </View>
     

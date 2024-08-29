@@ -1,15 +1,24 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import CustomHeader from '@/components/headers/CustomHeader';
 import { View } from 'react-native';
+import BottomSheet from '@/components/CreateOptions';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [isSheetVisible, setSheetVisible] = useState(false);
 
+  const handleCreatePress = () => {
+    setSheetVisible(true);
+  };
+
+  const closeSheet = () => {
+    setSheetVisible(false);
+  };
   return (
     <>
     {/* <CustomHeader/> */}
@@ -42,27 +51,32 @@ export default function TabLayout() {
           ),
         }}
         />
-              <Tabs.Screen
-        name="create"
-        options={{
-          title: 'Create',
-          tabBarIcon: ({ color, focused }) => (
-            <View
-            style={{
-              position: 'absolute',
-              bottom: 10, // space from bottombar
-              height: 58,
-              width: 58,
-              borderRadius: 58,
-              backgroundColor: Colors[colorScheme ?? 'light'].tint,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <TabBarIcon name={focused ? 'add-circle-outline' : 'add-circle-outline'} color={"white"} />
-            </View>
-
-          ),
-        }}
+           <Tabs.Screen
+          name="create"
+          options={{
+            title: 'Create',
+            tabBarIcon: ({ color, focused }) => (
+              <View
+                style={{
+                  position: 'absolute',
+                  bottom: 10, // space from bottombar
+                  height: 58,
+                  width: 58,
+                  borderRadius: 58,
+                  backgroundColor: Colors[colorScheme ?? 'light'].tint,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TabBarIcon name={focused ? 'add-circle-outline' : 'add-circle-outline'} color={"white"} />
+              </View>
+            ),
+          }}
+          listeners={{
+            tabPress: (e) => {
+              e.preventDefault(); // Prevent default tab action
+              handleCreatePress()            
+              },
+          }}
         />
               <Tabs.Screen
         name="chatlist"
@@ -86,6 +100,8 @@ export default function TabLayout() {
       />
     
     </Tabs>
+    <BottomSheet visible={isSheetVisible} onClose={closeSheet} />
+
         </>
   );
 }

@@ -64,7 +64,7 @@ const ChatListScreen: React.FC = () => {
         />
         <View className="flex-1 ml-4">
           <View className="flex-row justify-between items-center">
-            <Text className="text-lg font-bold">{item.userName}</Text>
+            <Text className="font-psemibold text-lg">{item.userName}</Text>
             <Text className="text-xs text-gray-500">{timeAgo}</Text>
           </View>
           <Text
