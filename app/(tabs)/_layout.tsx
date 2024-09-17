@@ -7,6 +7,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import CustomHeader from '@/components/headers/CustomHeader';
 import { View } from 'react-native';
 import BottomSheet from '@/components/CreateOptions';
+import HomeHeader from '@/components/headers/HomeHeader';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -22,6 +23,7 @@ export default function TabLayout() {
   return (
     <>
     {/* <CustomHeader/> */}
+    {/* <HomeHeader/> */}
 
     <Tabs
       screenOptions={{

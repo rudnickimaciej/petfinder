@@ -11,5 +11,42 @@ import dogPaw from "../assets/images/dog-paw.png";
 import image1 from "../assets/images/image1.png";
 import image2 from "../assets/images/image2.png";
 import image3 from "../assets/images/image3.png";
+import missing_pet_1 from "../assets/images/missing-pets/missing-pet-1.jpg";
+import missing_pet_2 from "../assets/images/missing-pets/missing-pet-2.jpg";
+import missing_pet_3 from "../assets/images/missing-pets/missing-pet-3.jpg";
+import missing_pet_4 from "../assets/images/missing-pets/missing-pet-4.jpg";
+import missing_pet_5 from "../assets/images/missing-pets/missing-pet-5.jpg";
+import missing_pet_6 from "../assets/images/missing-pets/missing-pet-5.jpg";
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, dog,dog2,dogPaw,image1,image2,image3 };
+import found_pet_1 from "../assets/images/found-pets/found-pet-1.jpg";
+import found_pet_2 from "../assets/images/found-pets/found-pet-2.jpg";
+import found_pet_3 from "../assets/images/found-pets/found-pet-3.jpg";
+import found_pet_4 from "../assets/images/found-pets/found-pet-4.jpg";
+import found_pet_5 from "../assets/images/found-pets/found-pet-5.jpg";
+
+export default { 
+    profile, 
+    thumbnail,
+     cards, 
+     path,
+      logo, 
+      logoSmall, 
+      empty, 
+      dog,
+      dog2,
+      dogPaw,
+      image1,
+      image2,
+      image3,
+      missing_pet_1,
+      missing_pet_2,
+      missing_pet_3,
+      missing_pet_4,
+      missing_pet_5,
+      missing_pet_6,
+      found_pet_1,
+      found_pet_2,
+      found_pet_3,
+      found_pet_4,
+      found_pet_5
+     };

@@ -5,7 +5,7 @@ export type Pet = {
     name: string;
     date: string;
     address: string;
-    image: 'buddy' | 'luna'; // Adjust based on your available images
+    image: any
   };
   
   export interface PetOnMap {

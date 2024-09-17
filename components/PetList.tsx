@@ -27,7 +27,7 @@ const PetList: React.FC<PetListProps> = ({ pets, listName }) => {
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {pets.map((pet) => (
-            <PetCard pet={pet} />
+            <PetCard pet={pet} key = {pet.id} />
         ))}
       </ScrollView>
     </View>

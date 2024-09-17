@@ -8,6 +8,7 @@ import {router} from 'expo-router'
 import { Chat, ChatPreview } from '@/types/Chat';
 import CustomHeader from '@/components/headers/CustomHeader';
 import ChatlistHeader from '@/components/headers/ChatlistHeader';
+import { pl } from 'date-fns/locale';
 
 
 const chats: ChatPreview[] = [
@@ -15,7 +16,7 @@ const chats: ChatPreview[] = [
     id: '1',
     userName: 'Rebeka Ratry',
     lastMessage: 'Thanks for your patience ❤️...',
-    timestamp: '2023-08-18T14:48:00.000Z',
+    timestamp: '2024-08-29T12:48:00.000Z',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=200',
     status: 'unread',
   },
@@ -23,7 +24,7 @@ const chats: ChatPreview[] = [
     id: '2',
     userName: 'Adrito Rafsan',
     lastMessage: 'Shared a story with you',
-    timestamp: '2023-08-18T14:18:00.000Z',
+    timestamp: '2024-08-25T14:18:00.000Z',
     avatar: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=200',
     status: 'offline',
   },
@@ -31,7 +32,7 @@ const chats: ChatPreview[] = [
     id: '3',
     userName: 'Tanim Mridha',
     lastMessage: 'Private text for you',
-    timestamp: '2023-08-18T13:48:00.000Z',
+    timestamp: '2024-08-18T13:48:00.000Z',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=200',
     status: 'unread',
   },
@@ -39,7 +40,7 @@ const chats: ChatPreview[] = [
     id: '4',
     userName: 'Maliha Rahman',
     lastMessage: 'You need your help...',
-    timestamp: '2023-01-14T13:48:00.000Z',
+    timestamp: '2024-01-14T13:48:00.000Z',
     avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=200',
     status: 'offline',
   },
@@ -49,7 +50,7 @@ const ChatListScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const renderChatItem = ({ item }: { item: ChatPreview }) => {
-    const timeAgo = formatDistanceToNow(parseISO(item.timestamp), { addSuffix: true });
+    const timeAgo = formatDistanceToNow(parseISO(item.timestamp), { addSuffix: true,locale: pl});
 
     return (
       <TouchableOpacity
