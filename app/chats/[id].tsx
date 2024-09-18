@@ -4,7 +4,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { format, isToday, isYesterday, isSameDay } from 'date-fns';
 import { fetchChatByChatId } from '@/api/chatservicemock';
 import { Chat, ChatMessage } from '@/types/Chat';
-import LoadingIndicator2 from '@/components/LoadingIndicator2';
+import LoadingIndicator2 from '@/components/loading/LoadingIndicator2';
 import { useLoading } from '@/hooks/useLoading';
 import { Ionicons } from '@expo/vector-icons';
 import { pl } from 'date-fns/locale';

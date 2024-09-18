@@ -2,58 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PetCard from '@/components/PetCard';
-import { Pet } from '@/types/Pet';
+import MissingPetCard from '@/components/pet/MissingPetCard';
+import { MissingPet, Pet } from '@/types/Pet';
+import { missingPets } from '@/api/missingpetsmock';
 
-const petsData2 :Pet[] = [
-    {
-        id: 1,
-        name: 'Buddy',
-        address: 'Warsaw',
-        image: 'buddy',
-        date: '20 sierpnia 2024',
-    },
-    {
-        id: 2,
-        name: 'Luna',
-        address: 'Warsaw',
-        image: 'luna',
-        date: '20 sierpnia 2024',
-    },
-    {
-        id: 3,
-        name: 'Buddy',
-        address: 'Warsaw',
-        image: 'buddy',
-        date: '20 sierpnia 2024',
-    },
-];
-const petsData = [
-    {
-        id: '1',
-        name: 'Buddy',
-        breed: 'Labrador',
-        location: 'Warsaw',
-        image: 'https://example.com/buddy.jpg',
-        date: '20 sierpnia 2024',
-    },
-    {
-        id: '2',
-        name: 'Whiskers',
-        breed: 'Persian Cat',
-        location: 'Lublin',
-        image: 'https://example.com/whiskers.jpg',
-        date: 'Wczoraj 21:42',
-    },
-    {
-        id: '3',
-        name: 'Max',
-        breed: 'German Shepherd',
-        location: 'Krakow',
-        image: 'https://example.com/max.jpg',
-        date: '20 sierpnia 2024',
-    },
-];
 
 const PetSearchScreen: React.FC = () => {
     const router = useRouter();
@@ -72,13 +24,10 @@ const PetSearchScreen: React.FC = () => {
         setSortPopupVisible(false);
     };
 
-    const renderPetItem = ({ item }: { item: typeof petsData2[0] }) => (
-        <PetCard pet = {item}/>
+    const renderPetItem = ({ item }: { item: MissingPet }) => (
+        <MissingPetCard pet = {item}/>
     );
-    const renderPetItem2 = ({ item }: { item: typeof petsData2[0] }) => (
-        <PetCard pet={item} />
 
-    );
     return (
         <View className="flex-1 pt-8 bg-white">
             <View className="bg-white p-4 shadow-md">
@@ -99,7 +48,7 @@ const PetSearchScreen: React.FC = () => {
             </View>
 
             <View className="p-6 flex-row justify-between items-center">
-                <Text className="font-semibold text-lg">Znaleźliśmy {petsData.length} ogłoszeń</Text>
+                <Text className="font-semibold text-lg">Znaleźliśmy {missingPets.length} ogłoszeń</Text>
                 <View className="flex-row">
                     <TouchableOpacity onPress={() => setSortPopupVisible(!sortPopupVisible)} className="mr-4">
                         <Icon name="filter-outline" size={24} color="#000" />

@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../constants";
 import CustomButton from "./../components/CustomButton";
-import Loader from "./../components/Loader";
+import Loader from "../components/loading/Loader";
 import { isLoaded } from "expo-font";
 
 // import { useGlobalContext } from "../context/GlobalProvider";

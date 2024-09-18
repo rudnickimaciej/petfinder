@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ImageSourcePropType, Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { images } from "../constants";
-import { Pet } from '@/types/Pet';
-import { router, useRouter } from 'expo-router';
+import { FoundPet, } from '@/types/Pet';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { pl } from 'date-fns/locale';
+import { useRouter } from 'expo-router';
 
 
-type PetCardProps = {
-  pet: Pet;
+type FoundPetCardProps = {
+  pet: FoundPet;
 };
 
-const PetCard: React.FC<PetCardProps> = ({ pet }) => {
+const FoundPetCard: React.FC<FoundPetCardProps> = ({ pet }) => {
   const router = useRouter();
   const [pressedPetId, setPressedPetId] = useState<number | null>(null);
   const timeAgo = formatDistanceToNow(parseISO(pet.date), { addSuffix: true, locale: pl});
 
-  const handlePress = (pet: Pet) => {
+  const handlePress = (pet: FoundPet) => {
     
     router.push({
-        pathname: `/pet/[id]`,
+        pathname: `/foundpet/[id]`,
         params: { id: pet.id.toString(), pet: JSON.stringify(pet) },
     });
   };
@@ -41,28 +40,16 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
         pressedPetId === pet.id ? 'opacity-75' : 'opacity-100'
       }`}
     >
-      <View className="bg-white rounded-lg overflow-hidden mr-4 w-48"
-    //   style={{
-    //     shadowColor: '#000',
-    //     shadowOffset: { width: 0, height: 2 },
-    //     shadowOpacity: 0.25,
-    //     shadowRadius: 3.84,
-    //     elevation: 5, // For Android shadow
-    //   }}
-    >
+      <View className="bg-white rounded-lg overflow-hidden mr-4 w-48">
         <View className="relative">
-          <Image source={pet.image} className="w-full h-40" />
-          <View className="absolute top-2 left-3 w-20 h-5 rounded-full bg-red-500 flex items-center justify-center">
-            <Text className="text-white text-xs font-plight">Poszukiwany</Text>
-            </View>
+          <Image source={pet.images[0]} className="w-full h-40" />
         </View>
         <View className="p-3">
-          <Text className="text-lg font-pbold">{pet.name}</Text>
           <View className="flex-row items-center my-1">
             <FontAwesome name="calendar" size={16} color="gray" />
             <Text className="ml-2 text-gray-500 font-plight">{timeAgo}</Text>
           </View>
-          <Text className="text-gray-500 font-plight">{pet.address}</Text>
+          <Text className="text-gray-500 font-plight">{pet.location}</Text>
         </View>
       </View>
  </Pressable>
@@ -70,4 +57,4 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
     );
   };
 
-export default PetCard;
+export default FoundPetCard;

@@ -27,7 +27,7 @@ const PetCardDetail: React.FC = () => {
   return (
     <ScrollView contentContainerStyle={{ padding: 16 }} className="bg-gray-100">
       {/* Pet Image */}
-      <Image source={{ uri: pet.image }} className="w-full h-72 rounded-xl mb-6" />
+      <Image source={{ uri: pet.images[0] }} className="w-full h-72 rounded-xl mb-6" />
 
       {/* Pet Info */}
       <View className="bg-white rounded-xl p-6 shadow">
