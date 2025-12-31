@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ThemedView } from '@/components/ThemedView';
 import {Text} from 'react-native'
+import { AuthProvider } from '@/constants/context/AuthContextProps';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -48,21 +49,24 @@ export default function RootLayout() {
   return (
   
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> 
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} /> 
-        <Stack.Screen name="(auth)" options={{title: '', headerTransparent:true, headerTintColor:"white"  }} /> 
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="pet/[id]" options={{ title: '', headerTransparent:true }} />
-        <Stack.Screen name="notifications" options={{ title: 'Notifications'}} />
-        <Stack.Screen name="profile" options={{ title: 'Profile',headerShown: false}} />
-        <Stack.Screen name="chats/[id]" options={{headerShown: false}} />
-        <Stack.Screen name="chatlist" options={{headerShown: true}} />
-        <Stack.Screen name="filter" options={{headerShown:false}} />
-        <Stack.Screen name="createmissingpet" />
+     <AuthProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> 
+          <Stack.Screen name="onboarding" options={{ headerShown: false }} /> 
+          <Stack.Screen name="(auth)" options={{title: '', headerTransparent:true, headerTintColor:"white"  }} /> 
+          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="missingpet/[id]" options={{ title: '', headerTransparent:true }} />
+          <Stack.Screen name="foundpet/[id]" options={{ title: '', headerTransparent:true }} />
+          <Stack.Screen name="notifications" options={{ title: 'Notifications'}} />
+          {/* <Stack.Screen name="profile" options={{ title: 'Profile',headerShown: false}} /> */}
+          <Stack.Screen name="chats/[id]" options={{headerShown: false}} />
+          {/* <Stack.Screen name="chatlist" options={{headerShown: true}} /> */}
+          <Stack.Screen name="filter" options={{headerShown:false}} />
+          <Stack.Screen name="createmissingpet" />
+        </Stack>
+      </AuthProvider>
 
-      </Stack>
     </ThemeProvider>
   
   );

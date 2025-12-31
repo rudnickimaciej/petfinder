@@ -1,114 +1,201 @@
 import React, { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+import { View, Text, ScrollView, Dimensions, Alert } from "react-native";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
-import { images } from "../../constants";
- import { createUser } from "../../api/appwriteservice";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import { useAuth } from "@/constants/context/AuthContextProps";
 
-// import { useGlobalContext } from "../../context/GlobalProvider";
-
-interface FormState {
-  username: string;
-  email: string;
-  password: string;
-}
+const SignUpSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Nieprawidłowy email")
+    .required("Email jest wymagany"),
+  password: Yup.string()
+    .min(8, "Hasło musi mieć przynajmniej 8 znaków")
+    .required("Hasło jest wymagane"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password")], "Hasła nie są takie same")
+    .required("Potwierdzenie hasła jest wymagane"),
+});
 
 const SignUp: React.FC = () => {
-//   const { setUser, setIsLogged } = useGlobalContext();
   const router = useRouter();
+  const { register, confirmUserEmail } = useAuth();
 
   const [isSubmitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState<FormState>({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmationCode, setConfirmationCode] = useState("");
+  const [registeredEmail, setRegisteredEmail] = useState("");
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
-      Alert.alert("Error", "Please fill in all fields");
+  const submit = async (values: any) => {
+    setSubmitting(true);
+    setServerError(null); 
+
+    const result = await register(values.email, values.password, values.confirmPassword);
+
+    if (!result.ok) {
+      setServerError(result.message);
+    } else {
+      setRegisteredEmail(values.email);
+      setShowConfirmation(true);
+    }
+
+    setSubmitting(false);
+  };
+  const submitConfirmation = async () => {
+    if (!confirmationCode) {
       return;
     }
 
     setSubmitting(true);
-    try {
-      const result = await createUser(form.email, form.password, form.username);
-    //   setUser(result);
-    //   setIsLogged(true);
+    const result = await confirmUserEmail(registeredEmail, confirmationCode);
 
-      router.replace("/home");
-    } catch (error) {
-      Alert.alert("Error", (error as Error).message);
-    } finally {
-      setSubmitting(false);
+    if(!result.ok){
+       setServerError(result.message);
+    } else {
+      router.replace("/sign-in");
     }
+    setSubmitting(false);
   };
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-white h-full">
       <ScrollView>
         <View
-          className="w-full flex justify-center h-full px-4"
-          style={{
-            minHeight: Dimensions.get("window").height - 100,
-          }}
+          className="w-full px-6 pt-10"
+          style={{ minHeight: Dimensions.get("window").height - 100 }}
         >
-             <View className="relative my-12">
-              <Text className="text-4xl font-bold text-center text-white">
-                <Text className="text-secondary-200">PetFinder</Text>
-              </Text>
-            </View>
-
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Załóż konto
+          <Text className="text-4xl font-bold text-center text-black">
+            <Text className="text-blue-500">PetFinder</Text>
           </Text>
 
-          <FormField
-            title="Nazwa użytkownika"
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e })}
-            otherStyles="mt-10"
-            placeholder="Nazwa użytkownika"
-          />
+          <View className="mt-10 bg-white p-6 rounded-2xl shadow-lg">
+            {!showConfirmation ? (
+              <>
+                <Text className="text-2xl font-semibold text-black mb-4">
+                  Załóż konto
+                </Text>
 
-          <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
-            keyboardType="email-address"
-            placeholder="Email"
-          />
+                <Formik
+                  initialValues={{
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                  }}
+                  validationSchema={SignUpSchema}
+                  onSubmit={submit}
+                >
+                  {({
+                    handleChange,
+                    handleSubmit,
+                    values,
+                    touched,
+                    errors,
+                  }) => (
+                    <>
+                      <FormField
+                        title="Email"
+                        value={values.email}
+                        handleChangeText={handleChange("email")}
+                        otherStyles="mt-4"
+                        keyboardType="email-address"
+                        placeholder="Email"
+                      />
+                      {touched.email && errors.email && (
+                        <Text className="text-red-500 mt-1">
+                          {errors.email}
+                        </Text>
+                      )}
 
-          <FormField
-            title="Hasło"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
-            placeholder="Hasło"
-          />
+                      <FormField
+                        title="Hasło"
+                        value={values.password}
+                        handleChangeText={handleChange("password")}
+                        otherStyles="mt-4"
+                        placeholder="Hasło"
+                         isPassword
 
-          <CustomButton
-            title="Utwórz konto"
-            handlePress={submit}
-            containerStyles="mt-7"
-            isLoading={isSubmitting}
-            textStyles=""
-          />
+                      />
+                      {touched.password && errors.password && (
+                        <Text className="text-red-500 mt-1">
+                          {errors.password}
+                        </Text>
+                      )}
 
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              Masz już konto?
-            </Text>
-            <Link
-              href="/sign-in"
-              className="text-lg font-psemibold text-secondary"
-            >
-              Zaloguj się
-            </Link>
+                      <FormField
+                        title="Potwierdź hasło"
+                        value={values.confirmPassword}
+                        handleChangeText={handleChange("confirmPassword")}
+                        otherStyles="mt-4"
+                        placeholder="Potwierdź hasło"
+                        isPassword
+                      />
+                      {touched.confirmPassword &&
+                        errors.confirmPassword && (
+                          <Text className="text-red-500 mt-1">
+                            {errors.confirmPassword}
+                          </Text>
+                        )}
+
+                      <CustomButton
+                        title="Utwórz konto"
+                        handlePress={handleSubmit as any}
+                        containerStyles="mt-6 bg-blue-500"
+                        textStyles="text-white"
+                        isLoading={isSubmitting}
+                      />
+                    </>
+                  )}
+                </Formik>
+               {serverError && (
+              <Text className="text-red-500 mt-3">
+                {serverError}
+              </Text>
+)}    
+                <View className="flex justify-center pt-5 flex-row gap-2">
+                  <Text className="text-lg text-gray-600">
+                    Masz już konto?
+                  </Text>
+                  <Link
+                    href="/sign-in"
+                    className="text-lg font-bold text-blue-500"
+                  >
+                    Zaloguj się
+                  </Link>
+                </View>
+              </>
+            ) : (
+              <>
+                <Text className="text-2xl font-semibold text-black">
+                  Potwierdź swój email
+                </Text>
+
+                <Text className="mt-3 text-gray-700">
+                  Kod wysłano na{" "}
+                  <Text className="font-semibold">{registeredEmail}</Text>
+                </Text>
+
+                <FormField
+                  title="Kod potwierdzający"
+                  value={confirmationCode}
+                  handleChangeText={setConfirmationCode}
+                  otherStyles="mt-6"
+                  placeholder="Wpisz kod"
+                />
+
+                <CustomButton
+                  title="Potwierdź email"
+                  handlePress={submitConfirmation}
+                  containerStyles="mt-6 bg-blue-500"
+                  textStyles="text-white"
+                  isLoading={isSubmitting}
+                />
+              </>
+            )}
           </View>
         </View>
       </ScrollView>

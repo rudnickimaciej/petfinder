@@ -1,116 +1,101 @@
-import { useEffect, useState } from "react";
-import { Link, router, useNavigation } from "expo-router";
+import React, { useState } from "react";
+import { Alert, ScrollView, View, Text, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+import { useRouter, Link } from "expo-router";
 
-import { images } from "../../constants";
-import CustomButton from "../../components/CustomButton";
 import FormField from "../../components/FormField";
+import CustomButton from "../../components/CustomButton";
+import { loginUser } from "@/api/authservice";
 
-// import { getCurrentUser, signIn } from "../../lib/appwrite";
-// import { useGlobalContext } from "../../context/GlobalProvider";
+interface FormState {
+  email: string;
+  password: string;
+}
 
-const SignIn = () => {
-//   const { setUser, setIsLogged } = useGlobalContext();
+const SignIn: React.FC = () => {
+  const router = useRouter();
+
   const [isSubmitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     email: "",
     password: "",
   });
-  const navigation = useNavigation();
 
-  useEffect(() => {
-    navigation.setOptions({ headerShown: false });
-  }, [navigation]);
-  
   const submit = async () => {
-    if (form.email === "" || form.password === "") {
-      Alert.alert("Error", "Please fill in all fields");
+    if (!form.email || !form.password) {
+      Alert.alert("Błąd", "Wypełnij wszystkie pola");
+      return;
     }
 
     setSubmitting(true);
-
     try {
-    //   await signIn(form.email, form.password);
-    //   const result = await getCurrentUser();
-    //   setUser(result);
-    //   setIsLogged(true);
+      const response = await loginUser({
+        email: form.email,
+        password: form.password,
+      });
 
-      Alert.alert("Success", "User signed in successfully");
+      Alert.alert("Sukces", `Witaj ponownie, ${response.userName}!`);
       router.replace("/home");
     } catch (error) {
-      Alert.alert("Error", (error as Error).message);
+      Alert.alert("Błąd", (error as Error).message);
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <SafeAreaView className="bg-black primary h-full">
+    <SafeAreaView className="bg-white h-full">
       <ScrollView>
-
         <View
-          className="w-full flex justify-center h-full px-4"
-          style={{
-            minHeight: Dimensions.get("window").height - 100,
-          }}
+          className="w-full px-6 pt-10"
+          style={{ minHeight: Dimensions.get("window").height - 100 }}
         >
-            <View className="relative my-12">
-              <Text className="text-3xl font-bold text-center text-white">
-                <Text className="text-secondary-200">PetFinder</Text>
-              </Text>
-            </View>
-
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Zaloguj się
+          <Text className="text-4xl font-bold text-center text-black">
+            <Text className="text-blue-500">PetFinder</Text>
           </Text>
 
-          <FormField
-            title="Email"
-            value={form.email}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
-            otherStyles="mt-7"
-            keyboardType="email-address"
-            placeholder="Email"
-          />
-
-          <FormField
-            title="Hasło"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
-            otherStyles="mt-7"
-            placeholder="Hasło"
-          />
-
-          <CustomButton
-            title="Zaloguj"
-            handlePress={submit}
-            containerStyles="mt-7"
-            isLoading={isSubmitting}
-            textStyles=""
-          />
-
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-             Nie masz jeszcze konta?
+          <View className="mt-10 bg-white p-6 rounded-2xl shadow-lg">
+            <Text className="text-2xl font-semibold text-black mb-4">
+              Zaloguj się
             </Text>
-            <Link
-              href="/sign-up"
-              className="text-lg font-psemibold text-secondary"
-            >
-              Załóż konto
-            </Link>
-          </View>
-          <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              (DEV)
-            </Text>
-            <Link
-              href="/home"
-              className="text-lg font-psemibold text-secondary"
-            >
-              Go home 
-            </Link>
+
+            <FormField
+              title="Email"
+              value={form.email}
+              handleChangeText={(e) => setForm({ ...form, email: e })}
+              otherStyles="mt-4"
+              keyboardType="email-address"
+              placeholder="Email"
+            />
+
+            <FormField
+              title="Hasło"
+              value={form.password}
+              handleChangeText={(e) => setForm({ ...form, password: e })}
+              otherStyles="mt-6"
+              placeholder="Hasło"
+              secureTextEntry
+            />
+
+            <CustomButton
+              title="Zaloguj się"
+              handlePress={submit}
+              containerStyles="mt-6 bg-blue-500"
+              textStyles="text-white"
+              isLoading={isSubmitting}
+            />
+
+            <View className="flex justify-center pt-6 flex-row gap-2">
+              <Text className="text-lg text-gray-700">
+                Nie masz konta?
+              </Text>
+              <Link
+                href="/sign-up"
+                className="text-lg font-bold text-blue-500"
+              >
+                Załóż konto
+              </Link>
+            </View>
           </View>
         </View>
       </ScrollView>

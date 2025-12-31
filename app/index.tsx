@@ -1,42 +1,46 @@
-import { StatusBar } from "expo-status-bar";
-import { Redirect, router, Stack } from "expo-router";
-import { View, Text, Image, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useEffect, useRef } from "react";
+import { View, Text, ActivityIndicator, StyleSheet, Animated } from "react-native";
+import { Redirect } from "expo-router";
+import { useAuth } from "@/constants/context/AuthContextProps";
 
-import { images } from "../constants";
-import CustomButton from "./../components/CustomButton";
-import Loader from "../components/loading/Loader";
-import { isLoaded } from "expo-font";
-import { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+const Index: React.FC = () => {
+  const { isLogged, loading } = useAuth();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-// import { useGlobalContext } from "../context/GlobalProvider";
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
-const App = () => {
-  // const { loading, isLogged } = useGlobalContext();
-  const loading = false;
-  const isLogged = false;
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Animated.View style={{ opacity: fadeAnim, alignItems: "center" }}>
+          <Text style={styles.title}>PetFinder</Text>
+          <ActivityIndicator size="large" color="#4f46e5" style={{ marginTop: 20 }} />
+        </Animated.View>
+      </View>
+    );
+  }
 
-  if (!loading && isLogged) return <Redirect href="/home" />;
-  const [isAppFirstLaunched, setIsAppFirstLaunched] = useState(true);
-
-  // useEffect(async () => {
-  //   const appData = await AsyncStorage.getItem('isAppFirstLaunched');
-  //   if (appData == null) {
-  //     setIsAppFirstLaunched(true);
-  //     AsyncStorage.setItem('isAppFirstLaunched', 'false');
-  //   } else {
-  //     setIsAppFirstLaunched(false);
-  //   }
-
-    // AsyncStorage.removeItem('isAppFirstLaunched');
-  // }, []);
-
-  useEffect(()=>{setIsAppFirstLaunched(false)},[])
-
-  if(isAppFirstLaunched == true) 
-    return <Redirect href="/onboarding" />
-  return <Redirect href="/home" />
+  return <Redirect href={isLogged ? "/home" : "/sign-in"} />;
 };
 
-export default App;
+export default Index;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1f2937", // dark background
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "#4f46e5", // primary color
+  },
+});

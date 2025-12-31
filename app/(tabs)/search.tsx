@@ -80,7 +80,7 @@ const PetSearchScreen: React.FC = () => {
             )}
 
             <FlatList
-                data={petsData2}
+                data={missingPets}
                 renderItem={renderPetItem }
                 keyExtractor={(item) => item.id}
                 numColumns={2}
