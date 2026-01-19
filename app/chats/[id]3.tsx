@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { router } from 'expo-router';
 import { Chat, ChatMessage } from '@/types/Chat';
-import { fetchChatByChatId } from '@/api/chatservicemock';
+import { fetchChatByChatId } from '@/api/mocks/chatservicemock';
 
 const ChatListScreen: React.FC = () => {
   const [messages, setMessages] = useState<Chat>();

@@ -63,7 +63,13 @@ export default function RootLayout() {
           <Stack.Screen name="chats/[id]" options={{headerShown: false}} />
           {/* <Stack.Screen name="chatlist" options={{headerShown: true}} /> */}
           <Stack.Screen name="filter" options={{headerShown:false}} />
-          <Stack.Screen name="createmissingpet" />
+          <Stack.Screen name="location" options={{headerShown:false}} />
+          <Stack.Screen name="changepassword" options={{headerShown:true, title: 'Zmiana hasła'}} />
+
+          <Stack.Screen name="createmissingpetBPF"   options={{
+                // headerShown: false,
+              title: 'Zgłoszenie zaginięcia',
+        }}/>
         </Stack>
       </AuthProvider>
 

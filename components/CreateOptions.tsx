@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // or useRouter from expo-router if using Expo Router
+import { useNavigation } from '@react-navigation/native'; 
 import { useRouter } from 'expo-router';
 
 interface BottomSheetProps {
@@ -17,29 +17,29 @@ interface BottomSheetProps {
 }
 
 const BottomSheet: React.FC<BottomSheetProps> = ({ visible, onClose }) => {
-  const slideAnim = useRef(new Animated.Value(300)).current; // Start from off-screen below
-  const navigation = useNavigation(); // or const router = useRouter();
+  const slideAnim = useRef(new Animated.Value(300)).current; 
+  const navigation = useNavigation(); 
   const router = useRouter();
 
   useEffect(() => {
     if (visible) {
       Animated.timing(slideAnim, {
-        toValue: 0, // Slide up to the visible position
+        toValue: 0, 
         duration: 200,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(slideAnim, {
-        toValue: 300, // Slide down to hide it
+        toValue: 300,
         duration: 200,
         useNativeDriver: true,
-      }).start(() => onClose()); // Close the modal when animation is done
+      }).start(() => onClose()); 
     }
   }, [visible]);
 
   const handleOptionPress = () => {
     onClose();
-    router.push('/createmissingpet'); // Replace with the correct route name
+    router.push('/createmissingpetBPF'); // Replace with the correct route name
   };
 
 

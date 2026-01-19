@@ -9,6 +9,7 @@ interface FormFieldProps extends TextInputProps {
   handleChangeText: (text: string) => void;
   otherStyles?: string;
   isPassword?: boolean;
+  error?: string | false;   // 👈 DODAJ TO
 }
 
 const FormField: FC<FormFieldProps> = ({
@@ -18,6 +19,7 @@ const FormField: FC<FormFieldProps> = ({
   handleChangeText,
   otherStyles = "",
   isPassword = false,
+  error,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +28,8 @@ const FormField: FC<FormFieldProps> = ({
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base text-black-100 font-pmedium">{title}</Text>
 
-      <View className="w-full h-16 px-4 rounded-2xl border-2 focus:border-secondary flex flex-row items-center">
+      <View className={`w-full h-12 px-4 rounded-2xl border-2 flex flex-row items-center
+        ${error ? "border-red-500" : "border-gray-300"}`}>
         <TextInput
           className="flex-1 font-psemibold text-base"
           value={value}
@@ -47,8 +50,13 @@ const FormField: FC<FormFieldProps> = ({
           </TouchableOpacity>
         )}
       </View>
+
+      {error ? (
+        <Text className="text-red-500 text-sm">{error}</Text>
+      ) : null}
     </View>
   );
 };
+
 
 export default FormField;

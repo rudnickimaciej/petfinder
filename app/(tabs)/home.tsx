@@ -3,8 +3,8 @@ import HomeHeader from '@/components/headers/HomeHeader';
 import PetList from '@/components/pet/PetList';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { missingPets } from '@/api/missingpetsmock';
-import { foundPets } from '@/api/foundpetsmock';
+import { missingPets } from '@/api/mocks/missingpetsmock';
+import { foundPets } from '@/api/mocks/foundpetsmock';
 
 const HomePage: React.FC = () => {
     

@@ -2,12 +2,12 @@
 import React from 'react';
 import { View, Text, Image, Button, ScrollView } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { Pet } from '@/types/Pet';
+import { Post } from '@/types/Post';
 
 const PetCardDetail: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { pet } = route.params as { pet: Pet };
+  const { pet } = route.params as { pet: Post };
 
   const pet2 = {
     name: 'Buddy',

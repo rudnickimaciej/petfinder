@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ImageSourcePropType, Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { FoundPet, } from '@/types/Pet';
+import { FoundPPost, } from '@/types/Post';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import { useRouter } from 'expo-router';
 
 
 type FoundPetCardProps = {
-  pet: FoundPet;
+  pet: FoundPPost;
 };
 
 const FoundPetCard: React.FC<FoundPetCardProps> = ({ pet }) => {
@@ -16,7 +16,7 @@ const FoundPetCard: React.FC<FoundPetCardProps> = ({ pet }) => {
   const [pressedPetId, setPressedPetId] = useState<number | null>(null);
   const timeAgo = formatDistanceToNow(parseISO(pet.date), { addSuffix: true, locale: pl});
 
-  const handlePress = (pet: FoundPet) => {
+  const handlePress = (pet: FoundPPost) => {
     
     router.push({
         pathname: `/foundpet/[id]`,

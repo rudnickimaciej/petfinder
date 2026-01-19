@@ -5,8 +5,7 @@ import { useRouter, Link } from "expo-router";
 
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { loginUser } from "@/api/authservice";
-
+import { useAuth } from "@/constants/context/AuthContextProps";
 interface FormState {
   email: string;
   password: string;
@@ -20,24 +19,29 @@ const SignIn: React.FC = () => {
     email: "",
     password: "",
   });
+    const [serverError, setServerError] = useState<string | null>(null);
+    const { login
+
+     } = useAuth();
+  
 
   const submit = async () => {
     if (!form.email || !form.password) {
       Alert.alert("Błąd", "Wypełnij wszystkie pola");
       return;
     }
-
+    setServerError(null);
     setSubmitting(true);
     try {
-      const response = await loginUser({
-        email: form.email,
-        password: form.password,
-      });
+      const response = await login(form.email, form.password)
+      if(response.ok){
+        router.replace("/home");
+      } else {
+        setServerError(response.message);
+      }
+    } catch (error: any) {
+      setServerError(error.message);
 
-      Alert.alert("Sukces", `Witaj ponownie, ${response.userName}!`);
-      router.replace("/home");
-    } catch (error) {
-      Alert.alert("Błąd", (error as Error).message);
     } finally {
       setSubmitting(false);
     }
@@ -74,8 +78,10 @@ const SignIn: React.FC = () => {
               handleChangeText={(e) => setForm({ ...form, password: e })}
               otherStyles="mt-6"
               placeholder="Hasło"
-              secureTextEntry
+              isPassword
             />
+            {serverError && <Text className="text-red-500 mt-3">{serverError}</Text>}
+            
 
             <CustomButton
               title="Zaloguj się"

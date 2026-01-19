@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { format, isToday, isYesterday, isSameDay } from 'date-fns';
-import { fetchChatByChatId } from '@/api/chatservicemock';
+import { fetchChatByChatId } from '@/api/mocks/chatservicemock';
 import { Chat, ChatMessage } from '@/types/Chat';
 import LoadingIndicator2 from '@/components/loading/LoadingIndicator2';
 import { useLoading } from '@/hooks/useLoading';

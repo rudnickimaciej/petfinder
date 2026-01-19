@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import images from '../../constants/images';
 import Tag from '@/components/tags/Tag';
-import { foundPets } from '@/api/foundpetsmock';
+import { foundPets } from '@/api/mocks/foundpetsmock';
 
 const { width } = Dimensions.get('window');
 

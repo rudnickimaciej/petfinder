@@ -4,8 +4,15 @@ import { Redirect } from "expo-router";
 import { useAuth } from "@/constants/context/AuthContextProps";
 
 const Index: React.FC = () => {
-  const { isLogged, loading } = useAuth();
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  
+  useEffect(() => {
+    (async () => {
+      // await logout();
+    })();
+  }, []);
+
+  const { isLogged, loading, logout } = useAuth();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {

@@ -1,14 +1,14 @@
 import { images } from '@/constants';
-import { MissingPet, Pet } from '@/types/Pet';
+import { MissingPost, Post } from '@/types/Post';
 import { User } from '@/types/User';
 
 const user: User = {
-  id: "1",
+  id: "2F1C6865-F2FC-49EA-845E-F11E3C5F484D",
   name: 'Varsha',
   email: 'john.doe@example.com',
   avatar: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=200',
 }
-export const missingPets: MissingPet[] = [
+export const missingPets: MissingPost[] = [
   {
     id: 1,
     name: 'Buddy',
