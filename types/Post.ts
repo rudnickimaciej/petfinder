@@ -77,7 +77,7 @@ export type Location = {
   lastSeenLongitude?: number;
 
   photos: string[];
-
+  ownerId: string;
   owner?: {
     name: string;
     avatarUrl?: string;

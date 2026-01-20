@@ -28,7 +28,6 @@ const PetCard: React.FC<Props> = ({ pet, variant = "list" }) => {
     );
   };
 
-  /* ===== GRID (uproszczony) ===== */
   if (variant === "grid") {
     return (
       <Pressable onPress={onPress} style={{ flex: 1, margin: 6 }}>
@@ -45,32 +44,33 @@ const PetCard: React.FC<Props> = ({ pet, variant = "list" }) => {
               {pet.name}
             </Text>
 
-            {pet.location?.name && (
+            {/* {pet.location?.name && (
               <Text className="text-xs text-gray-500" numberOfLines={1}>
+
                 {pet.location.name}
               </Text>
-            )}
+            )} */}
+             <Text className="text-xs text-gray-500" numberOfLines={1}>
+
+                Warszawa
+              </Text>
           </View>
         </View>
       </Pressable>
     );
   }
 
-  /* ===== LISTA (jak na screenie) ===== */
   return (
     <Pressable onPress={onPress} className="px-4 mb-3">
       <View className="flex-row bg-white rounded-xl overflow-hidden border border-gray-200">
-        {/* IMAGE */}
         <Image
           source={{
             uri: `https://findpet.blob.core.windows.net/posts${pet.mainImage}`,
           }}
-          className="w-32 h-32"
+          className="w-44 h-32"
         />
 
-        {/* CONTENT */}
         <View className="flex-1 p-3 justify-between">
-          {/* TOP */}
           <View>
             <Text
               className="font-semibold text-base"
@@ -79,7 +79,6 @@ const PetCard: React.FC<Props> = ({ pet, variant = "list" }) => {
               {pet.name}
             </Text>
 
-            {/* STATUS / TYPE */}
             <View className="mt-1 self-start px-2 py-0.5 rounded-full bg-gray-100">
               <Text className="text-xs text-gray-600">
                 {pet.postType === PostType.Missing
@@ -89,20 +88,22 @@ const PetCard: React.FC<Props> = ({ pet, variant = "list" }) => {
             </View>
           </View>
 
-          {/* BOTTOM */}
           <View>
-            {pet.location?.name && (
+            {/* {pet.location?.name && (
               <Text className="text-sm text-gray-600">
                 {pet.location.name}
               </Text>
-            )}
+            )} */}
+              <Text className="text-xs text-gray-500" numberOfLines={1}>
+
+                Warszawa
+              </Text>
             <Text className="text-xs text-gray-400">
               {timeAgo}
             </Text>
           </View>
         </View>
 
-        {/* ACTION */}
         <View className="p-3">
           <Ionicons
             name="heart-outline"

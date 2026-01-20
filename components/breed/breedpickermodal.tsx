@@ -35,7 +35,7 @@ const BreedPickerModal: React.FC<Props> = ({
         <TouchableOpacity onPress={onClose}>
           <Ionicons name="arrow-back" size={24} />
         </TouchableOpacity>
-        <Text className="text-xl font-bold ml-4">Wybierz rasę</Text>
+        <Text className="text-xl font-bold ml-4">Wybierz rasę2</Text>
       </View>
 
       <FlatList

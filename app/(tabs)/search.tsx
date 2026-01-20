@@ -15,6 +15,7 @@ import postService from "@/api/post.service";
 import { PostPreview } from "@/types/Post";
 import { ViewMode } from "@/types/ViewMode";
 import mapMissingPetToPostPreview from "@/api/mappers/petPreview.mapper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const PetSearchScreen: React.FC = () => {
   const params = useLocalSearchParams();
@@ -61,24 +62,24 @@ const PetSearchScreen: React.FC = () => {
     }
   };
 
-  // reset strony przy zmianie filtrów
   useEffect(() => {
     setPage(1);
   }, [animalType, breedId, latitude, longitude, radiusKm]);
 
-  // fetch danych
   useEffect(() => {
     fetchPosts();
   }, [page, animalType, breedId, latitude, longitude, radiusKm]);
 
   return (
+          <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
+    
     <View className="flex-1">
       {loading && page === 1 && (
         <ActivityIndicator className="mt-10" size="large" />
       )}
 
       <FlatList
-        key={viewMode} // reset layout przy zmianie grid/list
+        key={viewMode} 
         data={posts}
         numColumns={viewMode === "grid" ? 2 : 1}
         renderItem={({ item }) => (
@@ -86,7 +87,6 @@ const PetSearchScreen: React.FC = () => {
         )}
         ListHeaderComponent={
           <>
-            {/* SEARCH HEADER (CHIPY) */}
             <SearchHeader
               animalType={animalType}
               cityName={cityName}
@@ -95,7 +95,6 @@ const PetSearchScreen: React.FC = () => {
               radiusKm={radiusKm}
             />
 
-            {/* INFO + TRYB WIDOKU */}
             <View className="px-4 py-2 flex-row justify-between items-center border-b border-gray-100 bg-white">
               <Text className="font-semibold">
                 Znaleźliśmy {totalCount} ogłoszeń
@@ -145,6 +144,8 @@ const PetSearchScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       />
     </View>
+      </SafeAreaView>
+
   );
 };
 

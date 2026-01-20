@@ -13,16 +13,23 @@ import { useLocalSearchParams } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import postService from "@/api/post.service";
+import {getUserProfile} from "@/api/user.service";
+
 import Tag from "@/components/tags/Tag";
 import { MissingPetDetails } from "@/types/Post";
 import mapMissingPetDetailsResponse from "@/api/mappers/postDetails.mapper";
+import userProfileMapper from "@/api/mappers/userProfile.mapper";
+import { UserProfile } from "@/types/UserProfile";
 
 const { width } = Dimensions.get("window");
+
 
 const MissingPetPage: React.FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const [pet, setPet] = useState<MissingPetDetails | null>(null);
+  const [owner, setOwner] = useState<UserProfile|null>(null);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +38,13 @@ const MissingPetPage: React.FC = () => {
     const fetchPet = async () => {
       try {
         const response = await postService.getMissingPetById(id, null);
-        setPet(mapMissingPetDetailsResponse(response));
+        const mapped = mapMissingPetDetailsResponse(response);
+        setPet(mapped);
+        
+        const ownerResponse = await getUserProfile(mapped.ownerId)
+        const ownerMapped = userProfileMapper(ownerResponse);
+        setOwner(ownerMapped);
+
       } finally {
         setLoading(false);
       }
@@ -55,7 +68,6 @@ const MissingPetPage: React.FC = () => {
       contentContainerStyle={{ paddingBottom: 20 }}
       className="pt-10 px-2 bg-gray-200"
     >
-      {/* GALERIA */}
       <View className="relative">
         <FlatList
           data={pet.photos}
@@ -74,7 +86,6 @@ const MissingPetPage: React.FC = () => {
         />
       </View>
 
-      {/* INFO + TAGI */}
       <View className="bg-white p-4 shadow">
         <View className="flex-row justify-between items-center mb-5">
           <View>
@@ -125,20 +136,19 @@ const MissingPetPage: React.FC = () => {
         </View>
       </View>
 
-      {/* ZGŁASZAJĄCY */}
-      {pet.owner && (
+      {owner && (
         <View className="bg-white px-6 mt-4 rounded-lg shadow">
           <View className="flex-row items-center mb-4 mt-4">
-            {pet.owner.avatarUrl && (
+            {owner.avatar && (
               <Image
-                source={{ uri: pet.owner.avatarUrl }}
+                source={{ uri: owner.avatar }}
                 className="w-12 h-12 rounded-full mr-4"
               />
             )}
 
             <View className="flex-1">
               <Text className="text-base font-bold text-gray-800">
-                {pet.owner.name}
+                {owner.name}
               </Text>
               <Text className="text-sm text-gray-600">
                 Właściciel

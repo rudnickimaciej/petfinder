@@ -53,7 +53,9 @@ export default function TabLayout() {
           ),
         }}
         />
-           <Tabs.Screen
+
+
+        {/* <Tabs.Screen
           name="create"
           options={{
             title: 'Create',
@@ -69,8 +71,8 @@ export default function TabLayout() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <TabBarIcon name={focused ? 'add-circle-outline' : 'add-circle-outline'} color={"white"} />
-              </View>
+           <TabBarIcon name={focused ? 'add-circle-outline' : 'add-circle-outline'} color={"white"} />
+           </View>
             ),
           }}
           listeners={{
@@ -78,6 +80,18 @@ export default function TabLayout() {
               e.preventDefault(); // Prevent default tab action
               handleCreatePress()            
               },
+          }}
+        /> */}
+
+
+             <Tabs.Screen
+          name="create"
+          options={{
+            title: 'Create',
+            tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'add-circle-outline' : 'add-circle-outline'} color={color} />
+
+            ),
           }}
         />
               <Tabs.Screen

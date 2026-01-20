@@ -23,7 +23,7 @@ export const mapMissingPetDetailsResponse = (
   lastSeenLongitude: response.lastSeenLongitude,
 
   photos: response.photos,
-
+  ownerId: response.ownerId,
   owner: response.owner
     ? {
         name: response.owner.name,

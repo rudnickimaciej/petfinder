@@ -56,6 +56,7 @@ export interface MissingPetDetailsResponse {
   lastSeenLongitude?: number;
   lastSeenPlaceDescription?: string;
   photos: string[]; // URL-e
+  ownerId: string,
   owner?: {
     name: string;
     avatarUrl?: string;
